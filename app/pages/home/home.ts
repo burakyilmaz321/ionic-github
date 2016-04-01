@@ -1,5 +1,6 @@
-import {Page} from 'ionic-angular';
+import {Page, NavController} from 'ionic-angular';
 import { GitHubService } from '../../services/git-hub-service';
+import {DetailsPage} from '../details/details';
 
 @Page({
   templateUrl: 'build/pages/home/home.html',
@@ -8,20 +9,25 @@ import { GitHubService } from '../../services/git-hub-service';
 export class HomePage {
     public foundRepos;
     public username;
-    
-    constructor(private github: GitHubService) {
+
+    constructor(private github: GitHubService,
+                private nav: NavController) {
     }
-    
+
     getRepos() {
         this.github.getRepos(this.username)
             .subscribe(
                 data => {
                     this.foundRepos = data.json();
                 },
-                
+
                 err => console.log(err),
-                
+
                 () => console.log('getRepos completed')
             );
+    }
+
+    goToDetails(repo) {
+      this.nav.push(DetailsPage, {repo: repo});
     }
 }

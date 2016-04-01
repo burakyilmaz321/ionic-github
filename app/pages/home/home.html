@@ -8,15 +8,15 @@
     <ion-list inset>
         <ion-item>
             <ion-label>Username</ion-label>
-            <ion-input [(ngModel)]="username" type="text"></ion-input>   
+            <ion-input [(ngModel)]="username" type="text"></ion-input>
         </ion-item>
     </ion-list>
-    
+
     <div padding>
-        <button block (click)="getRepos()">Search</button>    
+        <button block (click)="getRepos()">Search</button>
     </div>
 
-    <ion-card *ngFor="#repo of foundRepos">
+    <ion-card *ngFor="#repo of foundRepos" (click)="goToDetails(repo)">
         <ion-card-header>
             {{repo.name}}
         </ion-card-header>
